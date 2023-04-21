@@ -1,0 +1,41 @@
+<div class="container">
+  <h2 class="welcome-text">Welcome to Surveyzen</h2>
+  <span class="sub-text"
+    >Please take a few minutes to tell us more about your preferences</span
+  >
+  <div class="main">
+    <div class="wrapper">
+      <ng-container *ngIf="questions">
+        <div
+          *ngFor="let question of questions; let i = index"
+          class="question-container"
+        >
+          <p>{{ question.questionText }}</p>
+          <div class="answer-wrapper">
+            <ng-container *ngIf="question.type === 'multipleChoice'">
+              <div *ngFor="let answer of question.answers; let i = index">
+                <input
+                  type="radio"
+                  id="radio_{{ i }}"
+                  name="{{ question.id }}"
+                  value="{{ answer.id }}"
+                />
+                <label for="radio_{{ i }}">
+                  {{ answer.answerText }}
+                </label>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="question.type === 'text'">
+              <input type="text" name="{{ question.id }}" />
+            </ng-container>
+          </div>
+        </div>
+        <div class="submit-container">
+          <button class="submit-button" (click)="submit()">
+            Submit Answers
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
